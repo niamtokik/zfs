@@ -1,0 +1,14 @@
+{application, zfs,
+ [{description, "Erlang ZFS Implementation"},
+  {vsn, "0.1.0"},
+  {registered, []},
+  {applications,
+   [kernel,
+    stdlib
+   ]},
+  {env,[]},
+  {modules, []},
+  {maintainers, ["contact@steepath.eu"]},
+  {licenses, ["ISC/OpenBSD"]},
+  {links, []}
+ ]}.
