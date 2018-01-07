@@ -1,6 +1,6 @@
 %%%===================================================================
 %%% @author Mathieu Kerjouan
-%%% @copyright 2017
+%%% @copyright 2018 (c) Mathieu Kerjouan
 %%% @version 0.1.0
 %%% @title drr data structure implementation
 %%% @doc
@@ -75,9 +75,7 @@ struct_begin(Bitstring, _Opts) ->
 
   {ok, Return8, ToNameRest}.
 
-struct_begin_test() -> 
-  [ struct_begin_test(X) || X <- [1] ].
-struct_begin_test(1) ->
+struct_begin_0001_test() ->
   IN = <<172, 203, 186, 245, 2, 0, 0, 0, 17, 0, 0, 0, 0, 0, 0, 0, 102,
          47, 41, 90, 0, 0, 0, 0, 2, 0, 0, 0, 4, 0, 0, 0, 54, 80, 15,
          33, 249, 114, 233, 135, 0, 0, 0, 0, 0, 0, 0, 0, 112, 111,
@@ -265,8 +263,8 @@ struct_spill() ->
 drr_blksz(<<BlkSz:32/little, Rest/bitstring>>) -> 
   {ok, #{ blksz => BlkSz }, Rest}.
 
-drr_blksz_test(1) ->
-  ?assertEqual(ok, ok).
+drr_blksz_0001_test() ->
+    ok.
 
 %%--------------------------------------------------------------------
 %% @doc
@@ -277,8 +275,8 @@ drr_blksz_test(1) ->
 drr_bonuslen(<<BonusLen:32/little, Rest/bitstring>>) ->
   {ok, #{bonuslen => BonusLen}, Rest}.
 
-drr_bonuslen_test(1) ->
-  ?assertEqual(ok, ok).
+drr_bonuslen_0001_test() ->
+    ok.
 
 %%--------------------------------------------------------------------
 %% @doc
@@ -289,10 +287,8 @@ drr_bonuslen_test(1) ->
 drr_bonustype(<<BonusType:64/little, Rest/bitstring>>) ->
   {ok, bonustype(BonusType), Rest/bitstring}.
 
-drr_bonustype_test() ->
-  [ drr_bonustype_test(X) || X <- lists:seq(1,1) ].
-drr_bonustype_test(1) ->
-  ?assertEqual(ok, ok).
+drr_bonustype_0001_test() ->
+    ok.
 
 % http://bxr.su/FreeBSD/sys/cddl/contrib/opensolaris/uts/common/fs/zfs/sys/dmu.h#126
 -define(BONUSTYPE(X,A), bonustype(X) when is_integer(X) -> A;
@@ -374,11 +370,8 @@ drr_checksum(<<Checksum:256/bitstring, Rest/bitstring>>) ->
   ?debugFmt("drr_checksum: ~p", [Checksum]),
   {ok, Checksum, Rest}.
 
-drr_checksum_test() ->
-  [ drr_checksum_test(X) || X <- [1] ].
-
-drr_checksum_test(1) -> 
-  ?assertEqual(ok, ok).
+drr_checksum_0001_test() -> 
+    ok.
 
 %%--------------------------------------------------------------------
 %% @doc
@@ -389,8 +382,8 @@ drr_checksumflags(<<ChecksumFlags:8, Rest/bitstring>>) ->
   ?debugFmt("drr_checksumflags: ~p", [ChecksumFlags]),
   {ok, ChecksumFlags, Rest}.
 
-drr_checksumflags_test(1) ->
-  ?assertEqual(ok, ok).
+drr_checksumflags_0001_test() ->
+    ok.
 
 %%--------------------------------------------------------------------
 %% @doc
@@ -401,8 +394,8 @@ drr_checksumtype(<<ChecksumType:8/little, Rest/bitstring>>) ->
   ?debugFmt("drr_checksumtype: ~p", [ChecksumType]),
   {ok, ChecksumType, Rest}.
 
-drr_checksumtype_test(1) ->
-  ?assertEqual(ok, ok).
+drr_checksumtype_0001_test() ->
+    ok.
 
 %%--------------------------------------------------------------------
 %% @doc
@@ -413,8 +406,8 @@ drr_compress(<<Compress:8/little, Rest/bitstring>>) ->
   ?debugFmt("drr_compress: ~p", [Compress]),
   {ok, Compress, Rest}.
 
-drr_compress_test(1) ->
-  ?assertEqual(ok, ok).
+drr_compress_0001_test() ->
+    ok.
 
 %%--------------------------------------------------------------------
 %% @doc
@@ -426,9 +419,7 @@ drr_creation_time(<<CreationTime:64/little, Rest/bitstring>>) ->
   ?debugFmt("drr_creation_time: ~p", [CreationTime]),
   {ok, #{ creation_time => CreationTime }, Rest}.
 
-drr_creation_time_test() ->
-  [drr_creation_time_test(X) || X <- [1] ].
-drr_creation_time_test(1) ->
+drr_creation_time_0001_test() ->
   IN = <<16#66, 16#2f, 16#29, 16#5a,0,0,0,0>>,
   OUT = {ok, #{ creation_time => 16#5a292f66 }, <<>>},
   ?assertEqual(OUT, drr_creation_time(IN)).
@@ -443,8 +434,8 @@ drr_firstobj(<<FirstObj:64/bitstring, Rest/bitstring>>) ->
   ?debugFmt("drr_firstobj: ~p", [FirstObj]),
   {ok, FirstObj, Rest}.
 
-drr_firstobj_test(1) ->
-  ?assertEqual(ok, ok).
+drr_firstobj_0001_test() ->
+    ok.
 
 %%--------------------------------------------------------------------
 %% @doc
@@ -455,8 +446,8 @@ drr_flags(<<Flags:32/bitstring, Rest/bitstring>>) ->
   ?debugFmt("drr_flags: ~p", [Flags]),
   {ok, #{ flags => Flags }, Rest}.
 
-drr_flags_test(1) ->
-  ?assertEqual(ok, ok).
+drr_flags_0001_test() ->
+    ok.
 
 %%--------------------------------------------------------------------
 %% @doc
@@ -467,8 +458,8 @@ drr_fromguid(<<FromGuid:64/bitstring, Rest/bitstring>>) ->
   ?debugFmt("drr_fromguid: ~p", [FromGuid]),
   {ok, #{ fromguid => FromGuid }, Rest}.
 
-drr_fromguid_test(1) ->
-  ?assertEqual(ok, ok).
+drr_fromguid_0001_test() ->
+    ok.
 
 %%--------------------------------------------------------------------
 %% @doc
@@ -479,8 +470,8 @@ drr_key(<<CkSum:256/bitstring, Prop:64/bitstring, Rest/bitstring>>) ->
   ?debugFmt("drr_key: ~p, ~p", [CkSum, Prop]),
   {ok, #{cksum => CkSum, prop => Prop}, Rest}.
 
-drr_key_test(1) ->
-  ?assertEqual(ok, ok).
+drr_key_0001_test() ->
+    ok.
 
 %%--------------------------------------------------------------------
 %% @doc
@@ -491,8 +482,8 @@ drr_length(<<Length:64/little, Rest/bitstring>>) ->
   ?debugFmt("drr_length: ~p", [Length]),
   {ok, #{ length => Length }, Rest}.
 
-drr_length_test(1) ->
-  ?assertEqual(ok, ok).
+drr_length_0001_test() ->
+    ok.
 
 %%--------------------------------------------------------------------
 %% @doc
@@ -507,14 +498,11 @@ drr_magic(<<16#2F5bacbac:64/little, Rest/bitstring>>) ->
 drr_magic(<<_:64, _/bitstring>>) ->
   {error, magic}.
 
-drr_magic_test() ->
-  [ drr_magic_test(X) || X <- lists:seq(1,2) ].
-
-drr_magic_test(1) ->
+drr_magic_0001_test() ->
   IN = <<172,203,186,245,2,0,0,0>>,
   OUT = {ok, #{magic => <<16#2F5bacbac:64/little>>}, <<>>},
-  ?assertEqual(OUT, drr_magic(IN));
-drr_magic_test(2) ->
+  ?assertEqual(OUT, drr_magic(IN)).
+drr_magic_0002_test() ->
   IN = <<1,2,3,4, 5,6,7,8>>,
   OUT = {error, magic},
   ?assertEqual(OUT, drr_magic(IN)).
@@ -528,8 +516,8 @@ drr_numobjs(<<NumObjs:64/little, Rest/bitstring>>) ->
   ?debugFmt("drr_numobjs: ~p", [NumObjs]),
   {ok, NumObjs, Rest}.
 
-drr_numobjs_test(1) ->
-  ?assertEqual(ok, ok).
+drr_numobjs_0001_test() ->
+    ok.
 
 %%--------------------------------------------------------------------
 %% @doc
@@ -539,8 +527,8 @@ drr_numobjs_test(1) ->
 drr_object(<<Object:64/bitstring, Rest/bitstring>>) -> 
   {ok, Object, Rest}.
 
-drr_object_test(1) ->
-  ?assertEqual(ok, ok).
+drr_object_0001_test() ->
+    ok.
 
 %%--------------------------------------------------------------------
 %% @doc
@@ -550,8 +538,8 @@ drr_object_test(1) ->
 drr_offset(<<Offset:64/little, Rest/bitstring>>) -> 
   {ok, Offset, Rest}.
 
-drr_offset_test(1) ->
-  ?assertEqual(ok, ok).
+drr_offset_0001_test() ->
+    ok.
 
 %%--------------------------------------------------------------------
 %% @doc
@@ -561,15 +549,15 @@ drr_offset_test(1) ->
 drr_pad(<<Pad:32, Rest/bitstring>>) -> 
   {ok, Pad, Rest}.
 
-drr_pad_test(1) ->
-  ?assertEqual(ok, ok).
+drr_pad_0001_test() ->
+    ok.
 
 -spec drr_pad2(bitstring()) -> {ok, bitstring(), bitstring()}.
 drr_pad2(<<Pad:8, Rest/bitstring>>) ->
   {ok, Pad, Rest}.
 
-drr_pad2_test(1) ->
-  ?assertEqual(ok, ok).
+drr_pad2_0001_test() ->
+    ok.
 
 %%--------------------------------------------------------------------
 %% @doc
@@ -580,8 +568,8 @@ drr_pad2_test(1) ->
 drr_refguid(<<RefGuid:64/bitstring, Rest/bitstring>>) -> 
   {ok, RefGuid, Rest}.
 
-drr_refguid_test(1) ->
-  ?assertEqual(ok, ok).
+drr_refguid_0001_test() ->
+    ok.
 
 %%--------------------------------------------------------------------
 %% @doc
@@ -592,8 +580,8 @@ drr_refguid_test(1) ->
 drr_refobject(<<RefObject:64/bitstring, Rest/bitstring>>) -> 
   {ok, RefObject, Rest}.
 
-drr_refobject_test(1) ->
-  ?assertEqual(ok, ok).
+drr_refobject_0001_test() ->
+    ok.
 
 %%--------------------------------------------------------------------
 %% @doc
@@ -604,8 +592,8 @@ drr_refobject_test(1) ->
 drr_refoffset(<<RefOffset:64/bitstring, Rest/bitstring>>) -> 
   {ok, RefOffset, Rest}.
 
-drr_refoffset_test(1) ->
-  ?assertEqual(ok, ok).
+drr_refoffset_test() ->
+    ok.
 
 %%--------------------------------------------------------------------
 %% @doc
@@ -617,10 +605,7 @@ drr_refoffset_test(1) ->
 drr_toguid(<<ToGuid:64/bitstring, Rest/bitstring>>) -> 
   {ok, #{ toguid => ToGuid }, Rest}.
 
-drr_toguid_test() ->
-  [ drr_toguid_test(X) || X <- [1] ].
-
-drr_toguid_test(1) ->
+drr_toguid_0001_test() ->
   IN = <<16#36, 16#50, 16#0f, 16#21, 16#f9, 16#72, 16#e9, 16#87>>,
   OUT = {ok, #{ toguid => <<54,80,15,33,249,114,233,135>>}, <<>>},
   ?assertEqual(OUT, drr_toguid(IN)).
@@ -636,17 +621,14 @@ drr_toname(<<ToName:(256*8)/bitstring, Rest/bitstring>>) ->
   ?debugFmt("drr_toname: ~p", [ToName]),
   {ok, #{ toname => zfs_lib:null_clean(ToName) }, Rest}.
 
-drr_toname_test() ->
-  [drr_toname_test(X) || X <- lists:seq(1, 2) ].
-
-drr_toname_test(1) ->
+drr_toname_0001_test() ->
   IN = <<>>,
-  ?assertException(error, _, drr_toname(IN));
-drr_toname_test(2) ->
+  ?assertException(error, _, drr_toname(IN)).
+drr_toname_0002_test() ->
   IN = <<"pool@test", 0:(256*8-72)>>,
   OUT = {ok, #{ toname => <<"pool@test">> }, <<>>},
-  ?assertEqual(OUT, drr_toname(IN));
-drr_toname_test(3) ->
+  ?assertEqual(OUT, drr_toname(IN)).
+drr_toname_0003_test() ->
   IN = <<"zpooltest", 0:(256*8-72)>>,
   OUT = {error, not_snapshot},
   ?assertEqual(OUT, drr_toname(IN)).
@@ -661,42 +643,39 @@ drr_type(<<Type:32/little, Rest/bitstring>>) ->
   ?debugFmt("drr_type: ~p", [Type]),
   {ok, #{ type => type(Type) }, Rest}.
 
-drr_type_test() ->
-  [ drr_type_test(X) || X <- lists:seq(1,9) ]. 
-
-drr_type_test(1) ->
+drr_type_0001_test() ->
   IN = <<0,0,0,0 >>,
   OUT = {ok, #{ type => drr_begin }, <<>>},
-  ?assertEqual(OUT, drr_type(IN));
-drr_type_test(2) ->
+  ?assertEqual(OUT, drr_type(IN)).
+drr_type_0002_test() ->
   IN = <<1,0,0,0>>,
   OUT = {ok, #{ type => drr_object }, <<>>},
-  ?assertEqual(OUT, drr_type(IN));
-drr_type_test(3) ->
+  ?assertEqual(OUT, drr_type(IN)).
+drr_type_0003_test() ->
   IN = <<2,0,0,0>>,
   OUT = {ok, #{ type => drr_freeobjects }, <<>>},
-  ?assertEqual(OUT, drr_type(IN));
-drr_type_test(4) ->
+  ?assertEqual(OUT, drr_type(IN)).
+drr_type_0004_test() ->
   IN = <<3,0,0,0>>,
   OUT = {ok, #{ type => drr_write}, <<>>},
-  ?assertEqual(OUT, drr_type(IN));
-drr_type_test(5) ->
+  ?assertEqual(OUT, drr_type(IN)).
+drr_type_0005_test() ->
   IN = <<4,0,0,0>>,
   OUT = {ok, #{ type => drr_free }, <<>>},
-  ?assertEqual(OUT, drr_type(IN));
-drr_type_test(6) ->
+  ?assertEqual(OUT, drr_type(IN)).
+drr_type_0006_test() ->
   IN = <<5,0,0,0>>,
   OUT = {ok, #{ type => drr_end }, <<>>},
-  ?assertEqual(OUT, drr_type(IN));
-drr_type_test(7) ->
+  ?assertEqual(OUT, drr_type(IN)).
+drr_type_0007_test() ->
   IN = <<6,0,0,0>>,
   OUT = {ok, #{ type => drr_write_byref }, <<>>},
-  ?assertEqual(OUT, drr_type(IN));
-drr_type_test(8) ->
+  ?assertEqual(OUT, drr_type(IN)).
+drr_type_0008_test() ->
   IN = <<7,0,0,0>>,
   OUT = {ok, #{ type => drr_spill }, <<>>},
-  ?assertEqual(OUT, drr_type(IN));
-drr_type_test(9) ->
+  ?assertEqual(OUT, drr_type(IN)).
+drr_type_0009_test() ->
   IN = <<8,0,0,0>>,
   OUT = {ok, #{ type => drr_umtypes }, <<>>},
   ?assertEqual(OUT, drr_type(IN)).
@@ -725,15 +704,12 @@ drr_versioninfo(<<VersionInfo:64/little, Rest/bitstring>>) ->
         , featuresflags => Features
         }, Rest}.
 
-drr_versioninfo_test() ->
-  drr_versioninfo_test(1),
-  drr_versioninfo_test(2).
-drr_versioninfo_test(1) ->
+drr_versioninfo_0001_test() ->
   IN = <<17,0,0,0,0,0,0,0>>,
   OUT = {ok, #{ hdrtype => substream
               , featuresflags => 4 }, <<>>},
-  ?assertEqual(OUT, drr_versioninfo(IN));
-drr_versioninfo_test(2) ->
+  ?assertEqual(OUT, drr_versioninfo(IN)).
+drr_versioninfo_0002_test() ->
   IN = <<16,0,0,0,0,0,0,0>>,
   OUT = {ok, #{ hdrtype => compoundstream
               , featuresflags => 4 }, <<>>}.
@@ -781,17 +757,15 @@ hdrtype_test(2) ->
 objset_type(<<ObjsetType:32/little, Rest/bitstring>>) ->
   {ok, #{ type => dmu_objset_type(ObjsetType) }, Rest}.
 
-objset_type_test() ->
-  [ objset_type_test(X) || X <- lists:seq(1,1) ].
-objset_type_test(1) ->
+objset_type_0001_test() ->
   IN = <<0,0,0,0>>,
   OUT = {ok, #{ type => none }, <<>>},
-  ?assertEqual(OUT, objset_type(IN));
-objset_type_test(2) ->
+  ?assertEqual(OUT, objset_type(IN)).
+objset_type_0002_test() ->
   IN = <<1,0,0,0>>,
   OUT = {ok, #{ type => meta }, <<>>},
-  ?assertEqual(OUT, objset_type(IN));
-objset_type_test(3) ->
+  ?assertEqual(OUT, objset_type(IN)).
+objset_type_0003_test() ->
   IN = <<2,0,0,0>>,
   OUT = {ok, #{ type => zfs}, <<>>},
  ?assertEqual(OUT, objset_type(IN)).
